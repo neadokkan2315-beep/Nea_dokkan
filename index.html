@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【ドッカン代行】 - 最速・安全のゲーム攻略サポート</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Swiper CSS (スライダー用) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- AOS CSS (スクロールアニメーション用) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* ゲーム感を出すため、ダークネイビー系に変更 */
+            background-color: #1a202c; 
+            color: #e2e8f0; /* 薄いグレーのテキスト */
+            overflow-x: hidden;
+        }
+        
+        /* カラー定義 (ドッカンバトルのイメージに合わせたゴールドとブラック/レッド) */
+        .primary-dark { background-color: #3b82f6; } /* CTAボタン用 */
+        .text-primary-dark { color: #facc15; } /* ゴールド */
+        .accent-color { background-color: #ef4444; } /* レッド */
+        .text-accent { color: #ef4444; } /* レッド */
+        
+        /* Swiper カスタマイズ */
+        .swiper-pagination-bullet-active {
+            background-color: #facc15 !important; /* ゴールド */
+        }
+        .hero-swiper {
+            height: 600px;
+            width: 100%;
+        }
+        @media (max-width: 640px) {
+            .hero-swiper { height: 500px; }
+        }
+        
+        /* ヒーロースライドの画像設定 */
+        .slide-bg {
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+        
+        /* ニュースティッカー用 */
+        .news-swiper {
+            height: 30px;
+            overflow: hidden;
+        }
+
+        /* グラスモーフィズムヘッダー */
+        .glass-header {
+            background: rgba(26, 32, 44, 0.9); /* ダークテーマのグラス */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ヘッダー (追従・グラスモーフィズム) -->
+    <header class="sticky top-0 z-50 glass-header shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4 md:justify-start md:space-x-10">
+                <!-- ロゴ -->
+                <div class="flex justify-start lg:w-0 lg:flex-1" data-aos="fade-down" data-aos-duration="800">
+                    <a href="#" class="flex items-center space-x-2 group">
+                        <!-- ゴールドのアイコン (星) -->
+                        <svg class="h-8 w-8 text-yellow-400 group-hover:text-yellow-200 transition" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.908-7.416 3.908 1.48-8.279-6.064-5.828 8.332-1.151z"/>
+                        </svg>
+                        <span class="text-2xl font-extrabold text-yellow-400 tracking-tight">DOKKAN AGENT</span>
+                    </a>
+                </div>
+
+                <!-- ナビゲーション (PC) -->
+                <nav class="hidden md:flex space-x-8 lg:space-x-10">
+                    <a href="#business" class="text-base font-medium text-gray-300 hover:text-yellow-400 transition relative group">
+                        代行サービス
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#feature" class="text-base font-medium text-gray-300 hover:text-yellow-400 transition relative group">
+                        選ばれる理由
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#case" class="text-base font-medium text-gray-300 hover:text-yellow-400 transition relative group">
+                        実績
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="#company" class="text-base font-medium text-gray-300 hover:text-yellow-400 transition relative group">
+                        運営情報
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </nav>
+
+                <!-- CTAボタン -->
+                <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0" data-aos="fade-left" data-aos-duration="800">
+                    <a href="#contact" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-full shadow-lg text-base font-semibold text-gray-900 bg-yellow-400 hover:bg-yellow-300 transition transform hover:-translate-y-0.5 duration-200">
+                        代行を依頼する
+                    </a>
+                </div>
+
+                <!-- モバイルメニューボタン -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-gray-800 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400">
+                        <span class="sr-only">メニューを開く</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-0 inset-x-0 p-2 transition transform origin-top-right z-50">
+            <div class="rounded-xl shadow-2xl ring-1 ring-black ring-opacity-5 bg-gray-900 divide-y-2 divide-gray-700">
+                <div class="pt-5 pb-6 px-5">
+                    <div class="flex items-center justify-between">
+                        <div><span class="text-xl font-bold text-yellow-400">DOKKAN AGENT</span></div>
+                        <div class="-mr-2">
+                            <button id="mobile-menu-close" type="button" class="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700">
+                                <span class="sr-only">メニューを閉じる</span>
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <nav class="grid gap-y-6">
+                            <a href="#business" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-800"><span class="ml-3 text-base font-medium text-gray-200">代行サービス</span></a>
+                            <a href="#feature" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-800"><span class="ml-3 text-base font-medium text-gray-200">選ばれる理由</span></a>
+                            <a href="#case" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-800"><span class="ml-3 text-base font-medium text-gray-200">実績</span></a>
+                            <a href="#company" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-800"><span class="ml-3 text-base font-medium text-gray-200">運営情報</span></a>
+                        </nav>
+                    </div>
+                </div>
+                <div class="py-6 px-5 space-y-6">
+                    <div>
+                        <a href="#contact" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-md text-base font-medium text-gray-900 bg-yellow-400 hover:bg-yellow-300">
+                            代行を依頼する
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ヒーローセクション (Swiper Slider) -->
+        <section id="hero" class="relative">
+            <div class="swiper hero-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1: 龍石周回 -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('https://placehold.co/1920x1080/0f172a/facc15?text=DRAGON+STONES+FARMING');">
+                            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+                                <div class="text-center px-4" data-aos="zoom-in" data-aos-delay="200">
+                                    <p class="text-lg sm:text-2xl text-red-500 font-bold mb-4 tracking-widest">ガチャを引きまくれ！</p>
+                                    <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                                        最速・大量の<br><span class="text-yellow-400">龍石周回代行</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2: 高難易度イベント -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('https://placehold.co/1920x1080/8b0000/ffffff?text=HIGH+DIFFICULTY+EVENTS');">
+                            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+                                <div class="text-center px-4">
+                                    <p class="text-lg sm:text-2xl text-red-500 font-bold mb-4 tracking-widest">諦めていた難関もクリア！</p>
+                                    <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                                        極限Z・バーチャル<br><span class="text-yellow-400">高難易度攻略代行</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3: アカウント育成 -->
+                    <div class="swiper-slide">
+                        <div class="slide-bg" style="background-image: url('https://placehold.co/1920x1080/1a202c/facc15?text=ACCOUNT+GROWTH+SERVICE');">
+                            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center">
+                                <div class="text-center px-4">
+                                    <p class="text-lg sm:text-2xl text-red-500 font-bold mb-4 tracking-widest">最短で最強アカウントへ</p>
+                                    <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                                        ランク・ストーリー<br><span class="text-yellow-400">完全代行サービス</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+            
+            <!-- スクロールダウンインジケーター -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+                <svg class="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </section>
+
+        <!-- ニュースティッカー (Swiper Vertical) -->
+        <section id="news" class="bg-gray-900 py-3 border-b border-gray-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
+                <div class="flex-shrink-0 mr-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold text-gray-900 bg-yellow-400 tracking-wider">INFO</span>
+                </div>
+                <div class="flex-grow overflow-hidden h-[30px]">
+                    <div class="swiper news-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide flex items-center text-sm text-gray-300">
+                                <span class="text-gray-500 mr-3 text-xs">2024.11.05</span>
+                                <span class="font-medium truncate text-red-400">【緊急】極限Zバトル全ステージ対応開始！</span>
+                            </div>
+                            <div class="swiper-slide flex items-center text-sm text-gray-300">
+                                <span class="text-gray-500 mr-3 text-xs">2024.10.28</span>
+                                <span class="font-medium truncate">新キャンペーン「龍石大増量」実施中！</span>
+                            </div>
+                            <div class="swiper-slide flex items-center text-sm text-gray-300">
+                                <span class="text-gray-500 mr-3 text-xs">2024.10.20</span>
+                                <span class="font-medium truncate">【重要】対応OSのアップデート情報を更新しました</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#company" class="text-xs text-yellow-400 font-semibold hover:underline ml-4 whitespace-nowrap">詳細 &rarr;</a>
+            </div>
+        </section>
+
+        <!-- 代行サービス内容セクション -->
+        <section id="business" class="py-24 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-sm font-bold uppercase text-red-500 mb-2 tracking-widest">SERVICE MENU</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">選べる代行サービス</h2>
+                    <div class="w-16 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1: 周回・収集 -->
+                    <div class="group bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-700" data-aos="fade-up" data-aos-delay="100">
+                        <div class="relative overflow-hidden h-56">
+                            <img class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110 opacity-70" src="https://placehold.co/400x300/1f2937/facc15?text=DRAGON+BALL+FARM" alt="龍石周回">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="absolute -top-8 right-6 bg-red-600 rounded-full p-3 shadow-lg transform group-hover:-translate-y-2 transition duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-yellow-400 mb-3 group-hover:text-red-500 transition">龍石・アイテム周回代行</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                ストーリー、イベント、ミッションを徹底周回し、龍石、覚醒メダル、修業アイテムなどを大量に収集します。
+                            </p>
+                            <span class="text-red-500 text-sm font-semibold flex items-center group-hover:translate-x-2 transition duration-300">
+                                料金を見る <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: 難易度攻略 -->
+                    <div class="group bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-700" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative overflow-hidden h-56">
+                            <img class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110 opacity-70" src="https://placehold.co/400x300/374151/facc15?text=HIGH+DIFFICULTY+CLEAR" alt="高難易度攻略">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="absolute -top-8 right-6 bg-red-600 rounded-full p-3 shadow-lg transform group-hover:-translate-y-2 transition duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-yellow-400 mb-3 group-hover:text-red-500 transition">高難易度イベント代行</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                極限Zバトル、バーチャルドッカン大乱戦、バトルロードなど、最高難易度のクリアを保証します。
+                            </p>
+                             <span class="text-red-500 text-sm font-semibold flex items-center group-hover:translate-x-2 transition duration-300">
+                                料金を見る <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: 育成・ミッション -->
+                    <div class="group bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-700" data-aos="fade-up" data-aos-delay="300">
+                        <div class="relative overflow-hidden h-56">
+                            <img class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110 opacity-70" src="https://placehold.co/400x300/374151/facc15?text=ACCOUNT+LEVELING" alt="アカウント育成">
+                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="absolute -top-8 right-6 bg-red-600 rounded-full p-3 shadow-lg transform group-hover:-translate-y-2 transition duration-300">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.047m0 0a12.003 12.003 0 001.218 15.659M4.158 11A12.025 12.025 0 0012 20a12.025 12.025 0 007.842-9a12.025 12.025 0 00-15.684 0z"></path></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-yellow-400 mb-3 group-hover:text-red-500 transition">アカウント育成・ミッション代行</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                ユーザーランク上げ、ストーリー全クリア、潜在能力玉全開放など、アカウントを徹底強化します。
+                            </p>
+                             <span class="text-red-500 text-sm font-semibold flex items-center group-hover:translate-x-2 transition duration-300">
+                                料金を見る <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 選ばれる理由 (Alternating layout with AOS) -->
+        <section id="feature" class="py-24 bg-gray-800 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-in">
+                    <p class="text-sm font-bold uppercase text-red-500 mb-2 tracking-widest">WHY CHOOSE US</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">ドッカン代行が選ばれる3つの理由</h2>
+                </div>
+
+                <!-- Feature 1: 安全性 -->
+                <div class="flex flex-col md:flex-row items-center mb-20 gap-10">
+                    <div class="w-full md:w-1/2" data-aos="fade-right">
+                        <img src="https://placehold.co/600x400/1e3a8a/ffffff?text=SECURITY+FIRST" alt="安全性" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500 opacity-90">
+                    </div>
+                    <div class="w-full md:w-1/2" data-aos="fade-left">
+                        <div class="flex items-center mb-4">
+                            <span class="text-5xl font-black text-gray-700 mr-4">01</span>
+                            <h3 class="text-2xl font-bold text-yellow-400">業界最高水準のBAN対策</h3>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            お客様の大切なアカウントを守るため、安全かつ手動に近い方法で慎重に作業を実施します。ツールや不正行為は一切使用せず、過去BAN報告ゼロの実績を維持しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: 迅速・格安 -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10">
+                    <div class="w-full md:w-1/2" data-aos="fade-left">
+                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=SPEED+AND+PRICE" alt="迅速・格安" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500 opacity-90">
+                    </div>
+                    <div class="w-full md:w-1/2" data-aos="fade-right">
+                        <div class="flex items-center mb-4">
+                            <span class="text-5xl font-black text-gray-700 mr-4">02</span>
+                            <h3 class="text-2xl font-bold text-yellow-400">最短即日対応＆明朗会計</h3>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-lg">
+                            お急ぎの依頼にも最短即日で対応可能です。また、事前に明確な料金を提示し、後から追加料金が発生することはありません。安心の業界最安値水準です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実績セクション (Swiper Carousel) -->
+        <section id="case" class="py-24 relative bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-sm font-bold uppercase text-red-500 mb-2 tracking-widest">SUCCESS CASE</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">達成した代行実績</h2>
+                    <p class="mt-4 text-gray-500">お客様の喜びの声をご覧ください</p>
+                </div>
+
+                <!-- Case Swiper -->
+                <div class="swiper case-swiper pb-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="swiper-wrapper">
+                        <!-- Case 1: 龍石 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 h-full flex flex-col justify-between hover:shadow-2xl transition duration-300">
+                                <div>
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="text-xs font-bold text-yellow-400 bg-gray-700 px-3 py-1 rounded-full">龍石大量獲得</span>
+                                        <span class="text-xs text-gray-500">20代・学生</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-4">龍石1,500個以上を確保</h4>
+                                    <p class="text-gray-400 text-sm mb-4">「サクサク作業を進めていただき、あっという間に龍石が貯まりました。次のフェスが楽しみです！」</p>
+                                </div>
+                                <div class="border-t border-gray-700 pt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">作業時間</span>
+                                        <span class="font-bold text-green-400">約24時間</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Case 2: ランク -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 h-full flex flex-col justify-between hover:shadow-2xl transition duration-300">
+                                <div>
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="text-xs font-bold text-red-500 bg-gray-700 px-3 py-1 rounded-full">アカウント強化</span>
+                                        <span class="text-xs text-gray-500">30代・会社員</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-4">ユーザーランクMAX達成</h4>
+                                    <p class="text-gray-400 text-sm mb-4">「多忙で手が回らなかったランク上げを一気にやってもらえました。スタミナ増加が本当に快適です。」</p>
+                                </div>
+                                <div class="border-t border-gray-700 pt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">達成ランク</span>
+                                        <span class="font-bold text-green-400">999</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Case 3: 高難易度 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 h-full flex flex-col justify-between hover:shadow-2xl transition duration-300">
+                                <div>
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="text-xs font-bold text-blue-400 bg-gray-700 px-3 py-1 rounded-full">難関クリア</span>
+                                        <span class="text-xs text-gray-500">40代・主婦</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-4">全属性ミッションをクリア</h4>
+                                    <p class="text-gray-400 text-sm mb-4">「何度も失敗していたミッションを無事にクリアしていただきました！丁寧な対応で安心できました。」</p>
+                                </div>
+                                <div class="border-t border-gray-700 pt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">クリア報酬</span>
+                                        <span class="font-bold text-green-400">大量龍石＋称号</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Case 4: 潜在能力 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gray-800 p-8 rounded-xl shadow-lg border-t-4 border-yellow-400 h-full flex flex-col justify-between hover:shadow-2xl transition duration-300">
+                                <div>
+                                    <div class="flex justify-between items-start mb-4">
+                                        <span class="text-xs font-bold text-green-400 bg-gray-700 px-3 py-1 rounded-full">キャラ育成</span>
+                                        <span class="text-xs text-gray-500">20代・フリーター</span>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-white mb-4">全LRキャラの潜在能力開放</h4>
+                                    <p class="text-gray-400 text-sm mb-4">「キャラが強くなりすぎて別ゲームのようです！細かなところまで対応してくれて助かりました。」</p>
+                                </div>
+                                <div class="border-t border-gray-700 pt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">対象キャラ数</span>
+                                        <span class="font-bold text-green-400">50体以上</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTAセクション (Parallax) -->
+        <section id="contact" class="relative py-28 bg-fixed bg-cover bg-center" style="background-image: url('https://placehold.co/1920x800/8b0000/000000?text=CONTACT+US+FOR+DOKKAN+SERVICE');">
+            <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center" data-aos="zoom-in">
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+                    もう周回に時間を取られない！
+                </h2>
+                <p class="text-red-300 text-lg mb-10">
+                    無料相談・お見積りだけでも歓迎です。<br>今すぐ最強のドッカンバトルアカウントを手に入れましょう！
+                </p>
+                <a href="mailto:info@example.com" class="inline-block px-10 py-4 bg-yellow-400 text-gray-900 font-bold text-xl rounded-full shadow-xl hover:bg-yellow-300 transform hover:scale-105 transition duration-300">
+                    無料相談・依頼はこちら
+                </a>
+            </div>
+        </section>
+
+        <!-- 会社概要 -->
+        <section id="company" class="py-24 bg-gray-800">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-16" data-aos="fade-up">
+                    <p class="text-sm font-bold uppercase text-red-500 mb-2 tracking-widest">COMPANY INFO</p>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">運営会社情報</h2>
+                </div>
+                
+                <div class="bg-gray-900 rounded-2xl shadow-xl overflow-hidden border border-gray-700" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-8 sm:p-12">
+                        <dl class="space-y-6">
+                            <div class="border-b border-gray-700 pb-4">
+                                <dt class="text-sm font-bold text-gray-400">サービス名</dt>
+                                <dd class="text-lg font-medium text-yellow-400 mt-1">DOKKAN AGENT</dd>
+                            </div>
+                            <div class="border-b border-gray-700 pb-4">
+                                <dt class="text-sm font-bold text-gray-400">運営会社</dt>
+                                <dd class="text-lg font-medium text-gray-200 mt-1">株式会社 GAME-MASTER</dd>
+                            </div>
+                            <div class="border-b border-gray-700 pb-4">
+                                <dt class="text-sm font-bold text-gray-400">所在地</dt>
+                                <dd class="text-lg font-medium text-gray-200 mt-1">東京都架空区代行町1-2-3 (オンライン専門)</dd>
+                            </div>
+                            <div>
+                                <dt class="text-sm font-bold text-gray-400">事業内容</dt>
+                                <dd class="text-lg font-medium text-gray-200 mt-1">スマートフォンゲームの代行サービス運営、eスポーツコンサルティング</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-black text-white py-12 border-t-8 border-yellow-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <span class="text-2xl font-bold tracking-tight text-yellow-400">DOKKAN AGENT</span>
+                <p class="text-gray-500 text-sm mt-2">あなたのゲームライフを徹底サポート。</p>
+            </div>
+            <div class="flex space-x-6 text-sm text-gray-500">
+                <a href="#" class="hover:text-white transition">利用規約</a>
+                <a href="#" class="hover:text-white transition">プライバシーポリシー</a>
+                <a href="#contact" class="hover:text-white transition">特定商取引法に基づく表記</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 text-center text-xs text-gray-600">
+            &copy; 2025 DOKKAN AGENT / GAME-MASTER Co., Ltd. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // AOS (Animate On Scroll) 初期化
+        AOS.init({
+            once: true, // アニメーションを1回だけ実行
+            offset: 100, // 発火位置の調整
+            duration: 800, // アニメーション時間
+            easing: 'ease-out-cubic',
+        });
+
+        // Hero Swiper (メインビジュアル)
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: true,
+            effect: 'fade', // フェード切り替え
+            speed: 1000,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // News Swiper (ニュースティッカー)
+        const newsSwiper = new Swiper('.news-swiper', {
+            direction: 'vertical',
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            speed: 600,
+        });
+
+        // Case Study Swiper (実績カルーセル)
+        const caseSwiper = new Swiper('.case-swiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+
+        // モバイルメニューの制御
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('mobile-menu-close');
+
+        btn.addEventListener('click', () => {
+            menu.classList.remove('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            menu.classList.add('hidden');
+        });
+
+        // メニュー内リンククリックで閉じる
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
